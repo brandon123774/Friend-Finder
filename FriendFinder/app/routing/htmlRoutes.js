@@ -1,11 +1,11 @@
 //add in any dependencies
 var path = require("path");
 
-//routes
+//export routes
 
 module.exports = function(app) {
 // HTMl GET requests 
-  app.get("/friends", function(req, res) {
+  app.get("/survey", function(req, res) {
     res.sendFile(path.join(__dirname, "../public/survey.html"));
   });
 

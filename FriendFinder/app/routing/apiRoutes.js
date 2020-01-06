@@ -1,13 +1,15 @@
 //Load data 
+var path = require("path")
 var friends = require("../data/friends.js");
+console.log(friends);
 
-//Routes
-
+//exports
 module.exports = function(app) {
 
-//api GET request
+//api GET request with console log to see 
   app.get("/api/friends", function(req, res) {
-    res.json(tableData);
+    res.json(friends);
+    console.log("friend[0].scores[0]:" + friends[0].scores[0]);
   });
 
   //api POST request

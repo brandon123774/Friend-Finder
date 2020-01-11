@@ -11,6 +11,7 @@
     <script src="https://code.jquery.com/jquery.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
+
 </head>
 
 <body>
@@ -159,7 +160,7 @@
 
         <br>
         <br>
-        
+
         <!-- Submit Button -->
         <button type="submit" class="btn btn-primary btn-lg btn-block" id="submit"><i class="fa fa-check-circle"
                 aria-hidden="true"></i>
@@ -175,9 +176,63 @@
                 </p>
             </div>
         </footer>
-
     </div>
+        <!-- Modal -->
+        <div id="results-modal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
 
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h2 class="modal-title"><strong>Best Match</strong></h2>
+                    </div>
+                    <div class="modal-body">
+                        <h2 id="match-name"></h2>
+                        <img id="match-img"
+                            src="" alt="">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+ 
+
+
+
+    <script>
+        $("#submit").on("click", function () {
+            event.preventDefault();
+            console.log("click");
+            var name = $("#name").val();
+            var photo = $("#photo").val();
+            var scores = []
+            $(".chosen-select").each(function (i, elem) {
+                scores.push($(this).val())
+            });
+
+            var newSurvey = {
+                friendName: name,
+                friendImage: photo,
+                scores: scores
+            }
+            console.log(newSurvey)
+            // ajax call
+            $.post("/api/friends", newSurvey, function (result) {
+                console.log(result.friendName, result.friendImage);
+                $("#match-name").text(result.friendName)
+                $("#match-image").attr("src", result.friendImage);
+                $("#results-modal").modal();
+                 // show the modal
+            })
+            // when back
+
+
+        })
+    </script>
 </body>
 
 </html>

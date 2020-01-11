@@ -14,7 +14,7 @@ module.exports = function (app) {
 
     //api POST request
     app.post("/api/friends", function (req, res) {
-
+        console.log(req.body);
         // setup the array hoding the user's answers
         var surveyResults = req.body.scores;
         // convert the values in surveyResults to integer values
